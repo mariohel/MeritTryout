@@ -1,0 +1,6 @@
+<div class="container-fluid" *ngIf="!userService.isLogged">
+    <a class="float-right" routerLink="/login" *ngIf="!userService.isLogged">Login</a>
+    <h1 class="text-center">
+      Welcome to {{ title }}!
+    </h1>  
+</div>

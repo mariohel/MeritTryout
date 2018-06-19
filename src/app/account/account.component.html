@@ -1,3 +1,38 @@
-<p>
-  account works!
-</p>
+<div class="container-fluid">
+  <h2 class="mx-5 my-3">Your Balance : {{balance}} </h2>
+  <div class="mx-5 my-3">   
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTransfer" aria-expanded="false" aria-controls="collapseTransfer">
+          Transfer Amount
+      </button>
+    </div>
+    <div class="collapse mx-5 my-3" id="collapseTransfer">
+      <div class="card card-body">
+          <form class="needs-validation form-inline" novalidate [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+              <div *ngIf="errorMessage" class="invalid-feedback">
+                  <div>{{errorMessage}}</div>
+              </div>                        
+              <div class="form-group">
+                  <input required type="text" placeholder="Account" formControlName="account" class="form-control mx-2" [ngClass]="{ 'is-invalid': submitted && formData.account.errors }" />
+                  <input required type="number" placeholder="Amount" formControlName="amount" class="form-control mx-2" [ngClass]="{ 'is-invalid': submitted && formData.amount.errors }" />
+                  <div *ngIf="submitted && formData.account.errors" class="invalid-feedback">
+                      <div *ngIf="formData.account.errors.required">Account is required</div>
+                  </div>
+                  <div *ngIf="submitted && formData.amount.errors" class="invalid-feedback">
+                      <div *ngIf="formData.amount.errors.required">Amount is required</div>
+                  </div> 
+                  <button [disabled]="loading" class="btn btn-primary"><i *ngIf="loading" class="fa fa-spinner fa-pulse"></i> Transfer Amount</button>        
+              </div>
+            </form>
+      </div>
+    </div>
+  <h2 class="mx-5 my-3">Transactions History</h2>
+  <div class="transaction-grid mr-auto ml-5">
+    <div class="row" *ngFor="let item of transactions">
+      <div class="col">{{item.from}}</div>
+      <div class="col">{{item.to}}</div>
+      <div class="col">{{item.amount}}</div>
+      <div class="w-100"></div>
+    </div>
+  </div>
+</div>
+

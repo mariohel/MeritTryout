@@ -20,7 +20,7 @@ router.get('/:accountKey/transactions', function(req, res, next) {
 });
 
 /* TRANSFER TO ANOTHER ACCOUNT */
-router.post('/transfer/:account', function(req, res, next) {
+router.post('/transfer', function(req, res, next) {
   account.accountTransfer(req.body);
   res.json({success:true , message: "Transfer Done Successfully"});
 });

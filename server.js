@@ -27,6 +27,9 @@ app.use('/api', router);
 const accountRoute = require('./routes/account.route');
 app.use('/api/account/', accountRoute);
 
+const userRoute = require('./routes/user.route');
+app.use('/api/user/', userRoute);
+
 // START THE SERVER
 // =============================================================================
 app.listen(port);
