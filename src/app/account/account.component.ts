@@ -14,7 +14,7 @@ export class AccountComponent implements OnInit {
   transferForm: FormGroup;
   loading = false;
   submitted = false;
-  errorMessage: string;
+  errorMessage: string = '';
   constructor(private userService: UserService, private accountService: AccountService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -45,28 +45,35 @@ export class AccountComponent implements OnInit {
   get formData() { return this.transferForm.controls; }
 
   onSubmit() {
-    this.errorMessage = null;
+    let that = this;
+    this.submitted = true;
+    this.errorMessage = '';
     // stop here if form is invalid
     if (this.transferForm.invalid) {
         return;
     }
 
-    this.loading = true;
-    this.submitted = true;
+    this.loading = true;    
     let data = {
       from: this.userService.currentUser.username,
       to: this.formData.account.value,
       amount: +this.formData.amount.value || 0
     }
     this.accountService.transfer(data)
-    .subscribe((data: any) => {        
-          this.loading = false;
-          this.getAccountInfo();               
-      },
+    .subscribe((data: any) => {
+      if(data.success)  {
+        this.loading = false;
+        this.getAccountInfo();  
+      } else if(data.message){
+        this.errorMessage = data.message;
+        this.loading = false;
+        console.log(data.message);
+      }                       
+    },
       error => {
         this.errorMessage = error.message;
         this.loading = false;
-        console.error(error);       
+        console.log(error);       
       });
   }
 

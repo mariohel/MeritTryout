@@ -7,20 +7,20 @@
     </div>
     <div class="collapse mx-5 my-3" id="collapseTransfer">
       <div class="card card-body">
-          <form class="needs-validation form-inline" novalidate [formGroup]="transferForm" (ngSubmit)="onSubmit()">
-              <div *ngIf="errorMessage" class="invalid-feedback">
-                  <div>{{errorMessage}}</div>
-              </div>                        
+          <form class="needs-validation form-inline" novalidate [formGroup]="transferForm" (ngSubmit)="onSubmit()">                                     
               <div class="form-group">
                   <input required type="text" placeholder="Account" formControlName="account" class="form-control mx-2" [ngClass]="{ 'is-invalid': submitted && formData.account.errors }" />
                   <input required type="number" placeholder="Amount" formControlName="amount" class="form-control mx-2" [ngClass]="{ 'is-invalid': submitted && formData.amount.errors }" />
+                  <button [disabled]="loading" class="btn btn-primary"><i *ngIf="loading" class="fa fa-spinner fa-pulse"></i> Send</button>        
                   <div *ngIf="submitted && formData.account.errors" class="invalid-feedback">
                       <div *ngIf="formData.account.errors.required">Account is required</div>
                   </div>
                   <div *ngIf="submitted && formData.amount.errors" class="invalid-feedback">
                       <div *ngIf="formData.amount.errors.required">Amount is required</div>
                   </div> 
-                  <button [disabled]="loading" class="btn btn-primary"><i *ngIf="loading" class="fa fa-spinner fa-pulse"></i> Transfer Amount</button>        
+                  <div *ngIf="errorMessage" class="mx-5 text-danger">
+                      <div>{{errorMessage}}</div>
+                  </div> 
               </div>
             </form>
       </div>

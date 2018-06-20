@@ -19,6 +19,14 @@ router.get('/', function(req, res) {
 });
 
 // more routes for our API will happen here
+// Initialize FIREBASE
+
+var admin = require("firebase-admin");
+var serviceAccount = require("./serviceAccountKey.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://merit-tryout.firebaseio.com"
+});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
