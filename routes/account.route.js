@@ -21,8 +21,8 @@ router.get('/:accountKey/transactions', function(req, res, next) {
 
 /* TRANSFER TO ANOTHER ACCOUNT */
 router.post('/transfer', function(req, res, next) {
-  account.accountTransfer(req.body);
-  res.json({success:true , message: "Transfer Done Successfully"});
+  let result = account.accountTransfer(req.body);
+  res.json(result);
 });
 
 module.exports = router;

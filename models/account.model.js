@@ -24,7 +24,7 @@ class Account{
             accounts[accountTransfer.from] = {balance: 0 , transactions: []}
 
         if (accounts[accountTransfer.from].balance < accounts[accountTransfer.to].balance) {
-            throw new Error ("Insufficient funds");
+           return {success:false , message: "Insufficient funds"}
         }
         accounts[accountTransfer.from].balance -= accountTransfer.amount;
         accounts[accountTransfer.to].balance += accountTransfer.amount;
@@ -34,6 +34,7 @@ class Account{
         accounts[accountTransfer.from].transactions.push(accountTransfer);
 
         this.blockChain.addBlock(accounts);
+        return {success:true , message: "Transfer Done Successfully"};
     }
 }
 exports.Account = Account;

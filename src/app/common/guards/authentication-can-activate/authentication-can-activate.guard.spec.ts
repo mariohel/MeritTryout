@@ -4,15 +4,13 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { CanActivateAuthentication } from './authentication-can-activate.guard';
-import { AuthenticationService } from './authentication.service';
-import { Auth0Service } from '../../common/services/auth0/auth0.service';
-import { LocalstorageService } from '../../common/services/localstorage/localstorage.service';
+import { UserService } from '../../services/user/user.service';
 
 describe('AuthenticationGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule, HttpModule, HttpClientModule ],
-      providers: [ AuthenticationService, CanActivateAuthentication, LocalstorageService, Auth0Service ]
+      providers: [ UserService, CanActivateAuthentication ]
     });
   });
 
